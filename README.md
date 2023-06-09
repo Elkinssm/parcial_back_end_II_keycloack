@@ -140,10 +140,10 @@ Para desplegar la aplicación en tu entorno local, necesitas levantar varios ser
 ## Paso 1: Levantar Keycloak en Docker
 
 Primero, necesitas levantar Keycloak en Docker. Asegúrate de que Docker esté instalado y funcionando en tu máquina.
-
+---
 ```shell
 docker run -p 8080:8080 -e KEYCLOAK_ADMIN=admin -e KEYCLOAK_ADMIN_PASSWORD=admin quay.io/keycloak/keycloak:21.1.1 start-dev
-
+```
 ##Paso 2: Levantar el Servicio de Discovery
 El siguiente paso es levantar el servicio de Discovery.
 
