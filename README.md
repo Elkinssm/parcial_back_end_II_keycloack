@@ -44,6 +44,27 @@ El microservicio utiliza una base de datos H2 en memoria para el almacenamiento 
 ### Configuración de JPA
 El microservicio utiliza JPA para la persistencia de datos con Hibernate como proveedor. Se configura para mostrar las consultas SQL y actualizar automáticamente el esquema de la base de datos para reflejar las entidades JPA.
 ---
-###Configuración de Eureka
+### Configuración de Eureka
 El microservicio se registra con un servidor Eureka en http://localhost:8761/eureka.
 ---
+# Configuración del Servicio Discovery (Eureka Server)
+
+El servicio `ms-discovery` actúa como un servidor de registro y descubrimiento de servicios, utilizando Netflix Eureka. 
+
+Esta es la configuración relevante para `ms-discovery`:
+
+- `spring.application.name`: Nombre de la aplicación, en este caso, es `ms-discovery`.
+- `server.port`: Puerto en el que se ejecuta el servidor, en este caso, es el puerto `8761`.
+
+La configuración de Eureka se desglosa de la siguiente manera:
+
+- `eureka.instance.hostname`: Define el nombre del host en el que se ejecuta el servidor Eureka, que es `localhost` en este caso.
+- `eureka.instance.prefer-ip-address`: Esta propiedad, cuando se establece en `true`, le dice al servidor Eureka que utilice la dirección IP del servicio en lugar del nombre del host cuando registra el servicio.
+
+En cuanto a la configuración del cliente de Eureka:
+
+- `eureka.client.fetch-registry`: Cuando se establece en `false`, indica que este servidor no necesita obtener el registro de Eureka de otros servidores Eureka.
+- `eureka.client.register-with-eureka`: Cuando se establece en `false`, indica que este servidor no necesita registrarse con otros servidores Eureka. Esto tiene sentido aquí ya que este servidor es el servidor de registro.
+
+En resumen, `ms-discovery` es un servidor Eureka que permite a los servicios registrarse con él y descubrir otros servicios a través de él. Sin embargo, como es el único servidor de Eureka en este sistema, no necesita registrarse ni obtener registros de otros servidores de Eureka.
+
