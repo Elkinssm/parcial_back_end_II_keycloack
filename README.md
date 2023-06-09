@@ -153,3 +153,9 @@ Una vez que el servicio de Discovery esté funcionando, puedes levantar el Gatew
 
 ## Paso 4: Levantar el Microservicio
 Finalmente, puedes levantar el microservicio.
+
+# Pruebas del programa
+https://youtu.be/BCBFWojxLNU
+[![Watch the video](https://img.youtube.com/vi/nTQUwghvy5Q/default.jpg)](https://youtu.be/BCBFWojxLNU)
+
+## Coleccion de postman
