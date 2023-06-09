@@ -104,7 +104,8 @@ Este proyecto utiliza Keycloak para la autenticación y autorización de usuario
 4. Proporciona un nombre para tu client.
 5. En el campo "Access Type", selecciona "confidential". Esta configuración es necesaria porque el client es una aplicación del lado del servidor que puede mantener un secreto.
 6. Haz clic en "Save" para guardar la configuración del client.
-![image](https://github.com/Elkinssm/parcial_back_end_II_keycloack/assets/52393397/998636b9-b261-4cfd-9bec-786eac7bb6ac)
+![image](https://github.com/Elkinssm/parcial_back_end_II_keycloack/assets/52393397/b8e75fd3-94a4-4806-b6d0-3c77d972b6ac)
+
 
 ## Paso 2: Crear un Rol en Keycloak
 
@@ -112,6 +113,8 @@ Este proyecto utiliza Keycloak para la autenticación y autorización de usuario
 2. Haz clic en "Add Role".
 3. En el campo "Name", introduce "USER".
 4. Haz clic en "Save" para guardar la configuración del rol.
+![image](https://github.com/Elkinssm/parcial_back_end_II_keycloack/assets/52393397/8ab57582-1f8e-4b22-916e-1992dc834c2c)
+
 
 ## Paso 3: Crear un Usuario en Keycloak
 
@@ -121,5 +124,7 @@ Este proyecto utiliza Keycloak para la autenticación y autorización de usuario
 4. Navega a la pestaña "Role Mappings".
 5. Añade el rol "USER" al usuario.
 6. Haz clic en "Save" para guardar la configuración del usuario.
+![image](https://github.com/Elkinssm/parcial_back_end_II_keycloack/assets/52393397/60742e38-26d9-4689-be4c-43e0264d7fa3)
+
 
 Una vez que hayas completado estos pasos, tendrás un client, un rol y un usuario configurados en Keycloak. Ahora estás listo para integrar Keycloak con tu aplicación.
