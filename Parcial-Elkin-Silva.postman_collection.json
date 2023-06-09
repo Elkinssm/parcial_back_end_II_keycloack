@@ -1,0 +1,198 @@
+{
+	"info": {
+		"_postman_id": "57bf6cc6-e330-4c6a-b83c-de3dde52f131",
+		"name": "Parcial-Elkin-Silva",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "8623951",
+		"_collection_link": "https://speeding-eclipse-581539.postman.co/workspace/My-Workspace~42787f31-2aff-40ed-8100-ac92df6fc63f/collection/8623951-57bf6cc6-e330-4c6a-b83c-de3dde52f131?action=share&creator=8623951&source=collection_link"
+	},
+	"item": [
+		{
+			"name": "Open id config realm",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/realms/parcial-realm/.well-known/openid-configuration",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"realms",
+						"parcial-realm",
+						".well-known",
+						"openid-configuration"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Sacar token ",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "grant_type",
+							"value": "password",
+							"type": "text"
+						},
+						{
+							"key": "client_id",
+							"value": "cliente-parcial",
+							"type": "text"
+						},
+						{
+							"key": "username",
+							"value": "test",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "test123",
+							"type": "text"
+						},
+						{
+							"key": "client_secret",
+							"value": "AFi9zLoZcO4dritIX7LGCbcT9cBYAaM3",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8080/realms/parcial-realm/protocol/openid-connect/token",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"realms",
+						"parcial-realm",
+						"protocol",
+						"openid-connect",
+						"token"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Refresh token",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "client_id",
+							"value": "partial-client",
+							"type": "text"
+						},
+						{
+							"key": "refresh_token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICI1Y2UwODZlMi1lMDdmLTQ0Y2ItYTgxYS00YmRmZjdjZjk2MDEifQ.eyJleHAiOjE2ODYzNDU4MzksImlhdCI6MTY4NjM0NDAzOSwianRpIjoiYjI2Njc4ODgtMzkyNi00NjBhLTljZTUtMjU0NTY2N2I5ZWYzIiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MDgwL3JlYWxtcy9wYXJjaWFsLXJlYWxtIiwiYXVkIjoiaHR0cDovL2xvY2FsaG9zdDo4MDgwL3JlYWxtcy9wYXJjaWFsLXJlYWxtIiwic3ViIjoiNzAxNzJjY2EtYjVjNC00YmUxLWFkNWYtNWM0MTRiYzk2Y2MzIiwidHlwIjoiUmVmcmVzaCIsImF6cCI6InBhcnRpYWwtY2xpZW50Iiwic2Vzc2lvbl9zdGF0ZSI6ImI1ZTc1ZGNhLWU0OGUtNGIxNC05Mjk3LWNmZWQxOTQ2OTBkYiIsInNjb3BlIjoicHJvZmlsZSBlbWFpbCIsInNpZCI6ImI1ZTc1ZGNhLWU0OGUtNGIxNC05Mjk3LWNmZWQxOTQ2OTBkYiJ9.A0LAJY6p7uKlsApmHPme9ZSHVLuseyI6_9Ef2Qp6lcI",
+							"type": "text"
+						},
+						{
+							"key": "grant_type",
+							"value": "refresh_token",
+							"type": "text"
+						},
+						{
+							"key": "client_secret",
+							"value": "AFi9zLoZcO4dritIX7LGCbcT9cBYAaM3",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8080/realms/parcial-realm/protocol/openid-connect/token",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"realms",
+						"parcial-realm",
+						"protocol",
+						"openid-connect",
+						"token"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Validar autenticacion",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICIxTnh5dzVvT3hEeWFGUjkwUVVyR0YyVmJ0ZkVTRFBxOE9kQXppd1c4d3prIn0.eyJleHAiOjE2ODYzNDQzNjYsImlhdCI6MTY4NjM0NDA2NiwianRpIjoiNzI3YmQzN2QtYzU0Ni00NjVjLTk3OTQtNDg0OGZiYzRjMTkyIiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MDgwL3JlYWxtcy9wYXJjaWFsLXJlYWxtIiwiYXVkIjoiYWNjb3VudCIsInN1YiI6IjcwMTcyY2NhLWI1YzQtNGJlMS1hZDVmLTVjNDE0YmM5NmNjMyIsInR5cCI6IkJlYXJlciIsImF6cCI6InBhcnRpYWwtY2xpZW50Iiwic2Vzc2lvbl9zdGF0ZSI6ImI1ZTc1ZGNhLWU0OGUtNGIxNC05Mjk3LWNmZWQxOTQ2OTBkYiIsImFjciI6IjEiLCJyZWFsbV9hY2Nlc3MiOnsicm9sZXMiOlsib2ZmbGluZV9hY2Nlc3MiLCJkZWZhdWx0LXJvbGVzLXBhcmNpYWwtcmVhbG0iLCJ1bWFfYXV0aG9yaXphdGlvbiIsIlVTRVIiXX0sInJlc291cmNlX2FjY2VzcyI6eyJhY2NvdW50Ijp7InJvbGVzIjpbIm1hbmFnZS1hY2NvdW50IiwibWFuYWdlLWFjY291bnQtbGlua3MiLCJ2aWV3LXByb2ZpbGUiXX19LCJzY29wZSI6InByb2ZpbGUgZW1haWwiLCJzaWQiOiJiNWU3NWRjYS1lNDhlLTRiMTQtOTI5Ny1jZmVkMTk0NjkwZGIiLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsIm5hbWUiOiJFbGtpbiBTaWx2YSIsInByZWZlcnJlZF91c2VybmFtZSI6ImVsa2luc20iLCJnaXZlbl9uYW1lIjoiRWxraW4iLCJmYW1pbHlfbmFtZSI6IlNpbHZhIiwiZW1haWwiOiJlbGtpbnNpbHZhbWFucmlxdWVAZ21haWwuY29tIn0.Kro_O0iY1PnquE0vF6HOFJszRWRPu6Ps_SdPxy11LeifMer2BxFNDfl-dYc2btuPcd8-8lAdicnxxCNsqK3eD-x7dlTXVuGzVsTB8z9qTEEvR4y9OdLLmM0NpI6dyzZNVeLhahAdaZXWa8m9TsOmLJfrVz4GL22C1lU4WsHb9uzJw45RuPG6ptIw-B38n9wka2WWKjmz46nhtJxCWUko6-9Pe5JYd796K21WSHFpG4ebsiBpSQ16-76ZXC__ndspT1m2fllEeVf2G3Huy556uFrt60-RSNzK7yWpEoNr1Ty4zWAOSkgBFUrn-IfujnaaSTnYMcGB_8yuhVGybFdO1g",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8090/api/v1/bills/all",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"api",
+						"v1",
+						"bills",
+						"all"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Consultar ms",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICIxTnh5dzVvT3hEeWFGUjkwUVVyR0YyVmJ0ZkVTRFBxOE9kQXppd1c4d3prIn0.eyJleHAiOjE2ODYyODAzMjAsImlhdCI6MTY4NjI4MDAyMCwianRpIjoiODAwN2MzMzYtYTc3Ni00NTY3LTkwZjUtNmM4NWI2MjVkMTczIiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MDgwL3JlYWxtcy9wYXJjaWFsLXJlYWxtIiwiYXVkIjoiYWNjb3VudCIsInN1YiI6IjQzNTVlZTZkLTJjMjEtNDllNC1hMDAyLTI1ZDUzNmI0MzVlNSIsInR5cCI6IkJlYXJlciIsImF6cCI6ImNsaWVudGUtcGFyY2lhbCIsInNlc3Npb25fc3RhdGUiOiJlNWUxZTFlMS1jNTI2LTRkNDEtYWI5NS02MDA3ZmRhYjYzOTYiLCJhY3IiOiIxIiwicmVhbG1fYWNjZXNzIjp7InJvbGVzIjpbIm9mZmxpbmVfYWNjZXNzIiwiZGVmYXVsdC1yb2xlcy1wYXJjaWFsLXJlYWxtIiwidW1hX2F1dGhvcml6YXRpb24iLCJVU0VSIl19LCJyZXNvdXJjZV9hY2Nlc3MiOnsiYWNjb3VudCI6eyJyb2xlcyI6WyJtYW5hZ2UtYWNjb3VudCIsIm1hbmFnZS1hY2NvdW50LWxpbmtzIiwidmlldy1wcm9maWxlIl19fSwic2NvcGUiOiJwcm9maWxlIGVtYWlsIiwic2lkIjoiZTVlMWUxZTEtYzUyNi00ZDQxLWFiOTUtNjAwN2ZkYWI2Mzk2IiwiZW1haWxfdmVyaWZpZWQiOmZhbHNlLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJ0ZXN0IiwiZ2l2ZW5fbmFtZSI6IiIsImZhbWlseV9uYW1lIjoiIn0.krdstxkhUuMWEHCzNImTEGljIN5F73xHWl7FIYzcnWa7z9Q0xKvXqWeg7sVY2LzyIcUiXWRBzh-IwwUovJRZ-p5dIb0mgDqmDz8HHx8YvzN0DJr7oJKRGoT74IIsPBFOzgn2sloATV1erUumKI15nd9geRyqchS6KeOYrheMdUgqmlPLFSlcqq_onySzqWOX0ZixavSaklIopRJFU1zcE30--9q-KR2D1F8myqBk662fhrCcVCaPxcnj77ewl7N275blrCZA8bd6beRrxqKjyPVRHFwayticvfli26mDNWU-91J5CXvYe2VxRIzmVcRvBY7idpRl873iad0ag6758g",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8087/api/v1/bills/all",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8087",
+					"path": [
+						"api",
+						"v1",
+						"bills",
+						"all"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
