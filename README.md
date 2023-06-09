@@ -9,12 +9,10 @@ El proyecto utiliza Keycloak como su sistema de gestión de identidad y acceso. 
 # Componentes
 ---
 ### Microservicio "Bills"
----
 El microservicio "Bills" es responsable de la gestión de las facturas de los clientes en el sistema de comercio electrónico. Este microservicio proporciona una API REST que expone las funcionalidades para interactuar con las facturas.
 ---
 Endpoints
 El servicio expone los siguientes endpoints:
----
 GET /bills/all - Este endpoint devuelve una lista de todas las facturas en el sistema. Este endpoint requiere que el usuario esté autenticado y tenga el rol "USER".
 ---
 Configuración
@@ -67,4 +65,29 @@ En cuanto a la configuración del cliente de Eureka:
 - `eureka.client.register-with-eureka`: Cuando se establece en `false`, indica que este servidor no necesita registrarse con otros servidores Eureka. Esto tiene sentido aquí ya que este servidor es el servidor de registro.
 ---
 En resumen, `ms-discovery` es un servidor Eureka que permite a los servicios registrarse con él y descubrir otros servicios a través de él. Sin embargo, como es el único servidor de Eureka en este sistema, no necesita registrarse ni obtener registros de otros servidores de Eureka.
+---
+# MS-Gateway
+Este proyecto representa la implementación de un Gateway para nuestra arquitectura de microservicios utilizando Spring Cloud Gateway. El propósito principal de este servicio es actuar como un punto de entrada único a nuestro sistema, manejando y enrutando las solicitudes a los servicios correspondientes.
+---
+Configuración del servicio
+La configuración del servicio se proporciona a través del archivo application.yaml.
+---
+Configuración de Eureka
+El servicio se registra con el servidor Eureka para participar en el descubrimiento de servicios. También recupera la información del registro de Eureka para conocer otros servicios disponibles.
+---
+Configuración de Gateway
+El Gateway está configurado para enrutar las solicitudes a los servicios correspondientes. Por ejemplo, todas las solicitudes que coinciden con la ruta /api/v1/** son enrutadas al servicio ms-bill. También se configura un filtro de retransmisión de token para pasar los tokens de autenticación a los servicios enrutados.
+---
+Configuración de seguridad
+La seguridad está habilitada para este servicio utilizando OAuth2. El cliente OAuth2 se registra con la información necesaria para interactuar con el servidor de autenticación, incluyendo el tipo de concesión de autorización, el proveedor, el alcance, el ID del cliente, la URI de redirección y el secreto del cliente.
 
+La configuración de seguridad también incluye la URI del emisor, que apunta al servidor Keycloak para autenticar y autorizar a los usuarios.
+---
+### Clase SecurityConfig
+Esta clase es una clase de configuración en Spring que se utiliza para establecer la configuración de seguridad para el Gateway.
+La clase SecurityConfig se anota con @Configuration, lo que indica que contiene métodos @Bean que pueden ser gestionados por el contenedor de Spring.
+El método springSecurityFilterChain es un método @Bean que configura la cadena de filtros de seguridad para el servidor. Esta cadena de filtros se aplica a todas las peticiones que llegan al servidor.
+El método toma una instancia de ServerHttpSecurity como parámetro, que es una interfaz de constructor para la configuración de seguridad HTTP.
+En este método, se configura el ServerHttpSecurity para que autentique todas las peticiones (anyExchange().authenticated()) y se habilita el inicio de sesión OAuth2 (oauth2Login()).
+Finalmente, este método devuelve la cadena de filtros de seguridad construida (http.build()), que será gestionada por Spring y aplicada a las peticiones entrantes.
+Por lo tanto, la clase SecurityConfig y el método springSecurityFilterChain desempeñan un papel crucial en la aplicación de la configuración de seguridad a las peticiones que llegan al Gateway.
