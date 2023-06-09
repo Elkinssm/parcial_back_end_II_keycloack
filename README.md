@@ -85,9 +85,40 @@ La configuración de seguridad también incluye la URI del emisor, que apunta al
 ---
 ### Clase SecurityConfig
 Esta clase es una clase de configuración en Spring que se utiliza para establecer la configuración de seguridad para el Gateway.
-La clase SecurityConfig se anota con @Configuration, lo que indica que contiene métodos @Bean que pueden ser gestionados por el contenedor de Spring.
-El método springSecurityFilterChain es un método @Bean que configura la cadena de filtros de seguridad para el servidor. Esta cadena de filtros se aplica a todas las peticiones que llegan al servidor.
-El método toma una instancia de ServerHttpSecurity como parámetro, que es una interfaz de constructor para la configuración de seguridad HTTP.
-En este método, se configura el ServerHttpSecurity para que autentique todas las peticiones (anyExchange().authenticated()) y se habilita el inicio de sesión OAuth2 (oauth2Login()).
-Finalmente, este método devuelve la cadena de filtros de seguridad construida (http.build()), que será gestionada por Spring y aplicada a las peticiones entrantes.
-Por lo tanto, la clase SecurityConfig y el método springSecurityFilterChain desempeñan un papel crucial en la aplicación de la configuración de seguridad a las peticiones que llegan al Gateway.
+La clase SecurityConfig se anota con `@Configuration`, lo que indica que contiene métodos @Bean que pueden ser gestionados por el contenedor de Spring.
+El método `springSecurityFilterChain` es un método `@Bean` que configura la cadena de filtros de seguridad para el servidor. Esta cadena de filtros se aplica a todas las peticiones que llegan al servidor.
+El método toma una instancia de `ServerHttpSecurity` como parámetro, que es una interfaz de constructor para la configuración de seguridad HTTP.
+En este método, se configura el `ServerHttpSecurity` para que autentique todas las peticiones `(anyExchange().authenticated())`y se habilita el inicio de sesión OAuth2 `(oauth2Login())`.
+Finalmente, este método devuelve la cadena de filtros de seguridad construida `(http.build())`, que será gestionada por Spring y aplicada a las peticiones entrantes.
+Por lo tanto, la clase `SecurityConfig` y el método springSecurityFilterChain desempeñan un papel crucial en la aplicación de la configuración de seguridad a las peticiones que llegan al Gateway.
+---
+# Configuración de Keycloak
+
+Este proyecto utiliza Keycloak para la autenticación y autorización de usuarios. Para configurar Keycloak en tu entorno local, sigue los pasos que se indican a continuación.
+
+## Paso 1: Crear un Client en Keycloak
+
+1. Inicia sesión en la interfaz de administración de Keycloak.
+2. Navega a la sección "Clients".
+3. Haz clic en "Create".
+4. Proporciona un nombre para tu client.
+5. En el campo "Access Type", selecciona "confidential". Esta configuración es necesaria porque el client es una aplicación del lado del servidor que puede mantener un secreto.
+6. Haz clic en "Save" para guardar la configuración del client.
+
+## Paso 2: Crear un Rol en Keycloak
+
+1. Navega a la sección "Roles".
+2. Haz clic en "Add Role".
+3. En el campo "Name", introduce "USER".
+4. Haz clic en "Save" para guardar la configuración del rol.
+
+## Paso 3: Crear un Usuario en Keycloak
+
+1. Navega a la sección "Users".
+2. Haz clic en "Add user".
+3. Completa los campos necesarios para crear un nuevo usuario.
+4. Navega a la pestaña "Role Mappings".
+5. Añade el rol "USER" al usuario.
+6. Haz clic en "Save" para guardar la configuración del usuario.
+
+Una vez que hayas completado estos pasos, tendrás un client, un rol y un usuario configurados en Keycloak. Ahora estás listo para integrar Keycloak con tu aplicación.
