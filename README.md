@@ -65,6 +65,7 @@ En cuanto a la configuración del cliente de Eureka:
 - `eureka.client.register-with-eureka`: Cuando se establece en `false`, indica que este servidor no necesita registrarse con otros servidores Eureka. Esto tiene sentido aquí ya que este servidor es el servidor de registro.
 ---
 En resumen, `ms-discovery` es un servidor Eureka que permite a los servicios registrarse con él y descubrir otros servicios a través de él. Sin embargo, como es el único servidor de Eureka en este sistema, no necesita registrarse ni obtener registros de otros servidores de Eureka.
+![image](https://github.com/Elkinssm/parcial_back_end_II_keycloack/assets/52393397/b271f065-4b82-467b-8b2f-1a11b30580f0)
 ---
 # MS-Gateway
 Este proyecto representa la implementación de un Gateway para nuestra arquitectura de microservicios utilizando Spring Cloud Gateway. El propósito principal de este servicio es actuar como un punto de entrada único a nuestro sistema, manejando y enrutando las solicitudes a los servicios correspondientes.
@@ -91,6 +92,9 @@ El método toma una instancia de `ServerHttpSecurity` como parámetro, que es un
 En este método, se configura el `ServerHttpSecurity` para que autentique todas las peticiones `(anyExchange().authenticated())`y se habilita el inicio de sesión OAuth2 `(oauth2Login())`.
 Finalmente, este método devuelve la cadena de filtros de seguridad construida `(http.build())`, que será gestionada por Spring y aplicada a las peticiones entrantes.
 Por lo tanto, la clase `SecurityConfig` y el método springSecurityFilterChain desempeñan un papel crucial en la aplicación de la configuración de seguridad a las peticiones que llegan al Gateway.
+Pantalla de login para reino
+![image](https://github.com/Elkinssm/parcial_back_end_II_keycloack/assets/52393397/a02e516e-3f28-4aa6-b92e-c0e1bade09ec)
+
 ---
 # Configuración de Keycloak
 
@@ -128,3 +132,17 @@ Este proyecto utiliza Keycloak para la autenticación y autorización de usuario
 
 
 Una vez que hayas completado estos pasos, tendrás un client, un rol y un usuario configurados en Keycloak. Ahora estás listo para integrar Keycloak con tu aplicación.
+
+# Despliegue de la Aplicación
+
+Para desplegar la aplicación en tu entorno local, necesitas levantar varios servicios en un orden específico. Sigue los pasos a continuación para levantar la aplicación.
+
+## Paso 1: Levantar Keycloak en Docker
+
+Primero, necesitas levantar Keycloak en Docker. Asegúrate de que Docker esté instalado y funcionando en tu máquina.
+
+```shell
+docker run -p 8080:8080 -e KEYCLOAK_ADMIN=admin -e KEYCLOAK_ADMIN_PASSWORD=admin quay.io/keycloak/keycloak:21.1.1 start-dev
+
+
+
