@@ -144,11 +144,11 @@ Primero, necesitas levantar Keycloak en Docker. Asegúrate de que Docker esté i
 ```shell
 docker run -p 8080:8080 -e KEYCLOAK_ADMIN=admin -e KEYCLOAK_ADMIN_PASSWORD=admin quay.io/keycloak/keycloak:21.1.1 start-dev
 ```
-##Paso 2: Levantar el Servicio de Discovery
+## Paso 2: Levantar el Servicio de Discovery
 El siguiente paso es levantar el servicio de Discovery.
 
-##Paso 3: Levantar el Gateway
+## Paso 3: Levantar el Gateway
 Una vez que el servicio de Discovery esté funcionando, puedes levantar el Gateway.
 
-##Paso 4: Levantar el Microservicio
+## Paso 4: Levantar el Microservicio
 Finalmente, puedes levantar el microservicio.
