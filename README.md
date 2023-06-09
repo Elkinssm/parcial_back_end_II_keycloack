@@ -101,6 +101,8 @@ El método `springSecurityFilterChain` es un método `@Bean` que configura la ca
 En este método, se configura el `ServerHttpSecurity` para que autentique todas las peticiones `(anyExchange().authenticated())` y se habilita el inicio de sesión OAuth2 `(oauth2Login())`.
 Finalmente, este método devuelve la cadena de filtros de seguridad construida `(http.build())`, que será gestionada por Spring y aplicada a las peticiones entrantes.
 Por lo tanto, la clase `SecurityConfig` y el método `springSecurityFilterChain` desempeñan un papel crucial en la aplicación de la configuración de seguridad a las peticiones que llegan al Gateway.
+
+---
 ![image](https://github.com/Elkinssm/parcial_back_end_II_keycloack/assets/52393397/a02e516e-3f28-4aa6-b92e-c0e1bade09ec)
 ---
 
