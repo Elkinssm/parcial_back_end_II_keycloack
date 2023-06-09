@@ -104,7 +104,7 @@ Este proyecto utiliza Keycloak para la autenticación y autorización de usuario
 4. Proporciona un nombre para tu client.
 5. En el campo "Access Type", selecciona "confidential". Esta configuración es necesaria porque el client es una aplicación del lado del servidor que puede mantener un secreto.
 6. Haz clic en "Save" para guardar la configuración del client.
-https://github.com/Elkinssm/parcial_back_end_II_keycloack/issues/1#issue-1750402395
+![image](https://github.com/Elkinssm/parcial_back_end_II_keycloack/assets/52393397/998636b9-b261-4cfd-9bec-786eac7bb6ac)
 
 ## Paso 2: Crear un Rol en Keycloak
 
