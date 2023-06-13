@@ -72,7 +72,8 @@ Configuración de Eureka:
 Configuración del cliente de Eureka:
 - `eureka.client.fetch-registry`: Cuando se establece en `false`, indica que este servidor no necesita obtener el registro de Eureka de otros servidores Eureka.
 - `eureka.client.register-with-eureka`: Cuando se establece en `false`, indica que este servidor no necesita registrarse con otros servidores Eureka. Esto tiene sentido aquí ya que este servidor es el servidor de registro.
-![image](https://github.com/Elkinssm/parcial_back_end_II_keycloack/assets/52393397/b271f065-4b82-467b-8b2f-1a11b30580f0)
+![Screenshot 2023-06-09 154218](https://github.com/Elkinssm/parcial_back_end_II_keycloack/assets/52393397/cc6cd354-425e-4723-8a2d-8e362e7d580a)
+
 ---
 
 # MS-Gateway
@@ -103,7 +104,8 @@ Finalmente, este método devuelve la cadena de filtros de seguridad construida `
 Por lo tanto, la clase `SecurityConfig` y el método `springSecurityFilterChain` desempeñan un papel crucial en la aplicación de la configuración de seguridad a las peticiones que llegan al Gateway.
 
 ---
-![image](https://github.com/Elkinssm/parcial_back_end_II_keycloack/assets/52393397/a02e516e-3f28-4aa6-b92e-c0e1bade09ec)
+![Screenshot 2023-06-09 143031](https://github.com/Elkinssm/parcial_back_end_II_keycloack/assets/52393397/08b7f749-2376-432f-a3b0-1cbb4d6796cc)
+
 ---
 
 # Configuración de Keycloak
@@ -116,14 +118,16 @@ Este proyecto utiliza Keycloak para la autenticación y autorización de usuario
 4. Proporciona un nombre para tu client.
 5. En el campo "Access Type", selecciona "confidential". Esta configuración es necesaria porque el client es una aplicación del lado del servidor que puede mantener un secreto.
 6. Haz clic en "Save" para guardar la configuración del client.
-![image](https://github.com/Elkinssm/parcial_back_end_II_keycloack/assets/52393397/b8e75fd3-94a4-4806-b6d0-3c77d972b6ac)
+![Screenshot 2023-06-09 143434](https://github.com/Elkinssm/parcial_back_end_II_keycloack/assets/52393397/42ab0792-1225-4147-bf4c-63c11bbc5e5b)
+
 
 ## Paso 2: Crear un Rol en Keycloak
 1. Navega a la sección "Roles".
 2. Haz clic en "Add Role".
 3. En el campo "Name", introduce "USER".
 4. Haz clic en "Save" para guardar la configuración del rol.
-![image](https://github.com/Elkinssm/parcial_back_end_II_keycloack/assets/52393397/8ab57582-1f8e-4b22-916e-1992dc834c2c)
+![Screenshot 2023-06-09 144058](https://github.com/Elkinssm/parcial_back_end_II_keycloack/assets/52393397/6b09d33b-2c56-4902-8337-77ed73ce75f9)
+
 
 ## Paso 3: Crear un Usuario en Keycloak
 1. Navega a la sección "Users".
@@ -132,7 +136,8 @@ Este proyecto utiliza Keycloak para la autenticación y autorización de usuario
 4. Navega a la pestaña "Role Mappings".
 5. Añade el rol "USER" al usuario.
 6. Haz clic en "Save" para guardar la configuración del usuario.
-![image](https://github.com/Elkinssm/parcial_back_end_II_keycloack/assets/52393397/60742e38-26d9-4689-be4c-43e0264d7fa3)
+![Screenshot 2023-06-09 143957](https://github.com/Elkinssm/parcial_back_end_II_keycloack/assets/52393397/e261ab0d-abe2-424b-8166-12aea637703a)
+
 
 Una vez que hayas completado estos pasos, tendrás un client, un rol y un usuario configurados en Keycloak. Ahora estás listo para integrar Keycloak con tu aplicación.
 
