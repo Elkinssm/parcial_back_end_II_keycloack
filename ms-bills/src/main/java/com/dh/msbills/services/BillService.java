@@ -16,4 +16,9 @@ public class BillService {
     public List<Bill> getAllBill() {
         return repository.findAll();
     }
+
+    public Bill findByBillId(String billId) {
+        return repository.findById(billId)
+                .orElseThrow(() -> new RuntimeException("Bill not found with id " + billId));
+    }
 }

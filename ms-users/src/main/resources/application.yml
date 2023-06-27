@@ -8,12 +8,13 @@ spring:
       client:
         provider:
           keycloak:
-            token-uri: http://localhost:8092/login/oauth2/code/keycloak
+            token-uri: http://localhost:8090/login/oauth2/code/keycloak
         registration:
           keycloak:
             client-secret: kDYGM9e0mpPsdQRlyMSg6tDQ92cJl9UO
             client-id: ms-partial-client
             authorization-grant-type: client_credentials
+            redirect-uri: http://localhost:8080/login/oauth2/code/keycloak
       resourceserver:
         jwt:
           issuer-uri: http://localhost:8080/realms/parcial-realm
@@ -31,5 +32,5 @@ keycloak:
   realm: parcial-realm
   clientId: ms-partial-client
   clientSecret: kDYGM9e0mpPsdQRlyMSg6tDQ92cJl9UO
-#  user: admin
-#  password: admin
+  jwkset:
+    url: http://localhost:8080/realms/parcial-realm/protocol/openid-connect/certs

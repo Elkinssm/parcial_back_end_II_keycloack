@@ -11,14 +11,13 @@ import org.springframework.stereotype.Repository;
 @RequiredArgsConstructor
 public class KeyCloakUserRepository implements IUserRepository {
 
-    private final Keycloak keycloak;
+    private final Keycloak keycloakClient;
     @Value("${keycloak.realm}")
     private String realm;
 
-
     @Override
     public User findById(String id) {
-        UserRepresentation user = keycloak.realm(realm).users().get(id).toRepresentation();
+        UserRepresentation user = keycloakClient.realm(realm).users().get(id).toRepresentation();
         return toUser(user);
     }
 

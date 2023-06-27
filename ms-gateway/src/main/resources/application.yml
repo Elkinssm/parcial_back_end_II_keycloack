@@ -14,6 +14,10 @@ spring:
         id: ms-bill
         predicates: Path=/api/v1/**
         uri: lb://ms-bill
+      routes[1]:
+        id: ms-users
+        predicates: Path=/api/v1/**
+        uri: lb://ms-users
       default-filters[0]: TokenRelay
   security:
     oauth2:

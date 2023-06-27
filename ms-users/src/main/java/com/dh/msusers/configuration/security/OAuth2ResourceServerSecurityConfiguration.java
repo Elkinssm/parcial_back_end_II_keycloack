@@ -1,4 +1,4 @@
-package com.dh.msusers.configuration.security.security;
+package com.dh.msusers.configuration.security;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
