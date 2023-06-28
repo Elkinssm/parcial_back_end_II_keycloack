@@ -26,9 +26,9 @@ El microservicio se ejecuta en el puerto 8081 y tiene un contexto de servlet en 
 ### Configuración de Seguridad Keycloak:
 Este proyecto utiliza Keycloak para la autenticación y autorización de usuarios. Los tokens emitidos por Keycloak son tokens JWT, y el proyecto utiliza una configuración personalizada para decodificar estos tokens y convertirlos en objetos de autenticación utilizables en el sistema.
 
---
+---
 # Feign Config
---
+---
 
 ### Clase: AccessTokenInterceptor
 Esta clase implementa la interfaz RequestInterceptor de Feign y se encarga de agregar el token de acceso en el encabezado de la solicitud saliente. El token se obtiene a partir del contexto de seguridad de Spring, en particular del JwtAuthenticationToken. Si se encuentra un token válido, se agrega al encabezado de la solicitud saliente.
