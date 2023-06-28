@@ -40,7 +40,6 @@ public class KeycloakConfiguration {
                 .password(password)
                 .resteasyClient(new ResteasyClientBuilderImpl()
                         .connectionPoolSize(10).build())
-                //.grantType(OAuth2Constants.PASSWORD)
                 .build();
     }
 }

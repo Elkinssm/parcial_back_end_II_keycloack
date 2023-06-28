@@ -25,4 +25,10 @@ public class BillService {
     public List<Bill> getByEmail(String email) {
         return repository.findAllByEmail(email);
     }
+
+    public Bill saveBill(Bill bill) {
+        return repository.save(bill);
+    }
+
+
 }

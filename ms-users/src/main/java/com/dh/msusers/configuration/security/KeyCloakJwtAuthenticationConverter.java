@@ -42,15 +42,27 @@ public class KeyCloakJwtAuthenticationConverter implements Converter<Jwt, Abstra
         for (Iterator<Map.Entry<String, JsonNode>> it = claims.fields(); it.hasNext(); ) {
             Map.Entry<String, JsonNode> field = it.next();
             if (field.getKey().equals("realm_access")) {
-                LOGGER.info(field.getKey() + ": ");
+                LOGGER.info("realm_access - roles: ");
                 for (JsonNode role : field.getValue().get("roles")) {
                     LOGGER.info("    Role: " + role.asText());
+                }
+            } else if (field.getKey().equals("user_groups")) {
+                LOGGER.info("User Groups: ");
+                JsonNode groups = field.getValue();
+                if (groups.isArray()) {
+                    for (JsonNode group : groups) {
+                        LOGGER.info("    Group: " + group.asText());
+                    }
+                } else {
+                    LOGGER.info("    Group: " + groups.asText());
                 }
             } else {
                 LOGGER.info(field.getKey() + ": " + field.getValue().toString());
             }
         }
     }
+
+
 
 
     private static List<GrantedAuthority> extractRoles(String route, JsonNode jwt) {

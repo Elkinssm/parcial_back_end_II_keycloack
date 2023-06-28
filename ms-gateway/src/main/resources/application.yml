@@ -27,12 +27,12 @@ spring:
             authorization-grant-type: authorization_code
             provider: api-gateway-service
             scope: openid
-            client-id: partial-client
+            client-id: ms-gateway-client
             redirect-uri: http://localhost:8090/login/oauth2/code/keycloak
             client-secret: AFi9zLoZcO4dritIX7LGCbcT9cBYAaM3
         provider:
           api-gateway-service:
-            issuer-uri: http://localhost:8080/realms/parcial-realm
+            issuer-uri: http://localhost:8080/realms/ecommerce-realm
   application:
     name: ms-gateway
 server:
