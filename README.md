@@ -23,33 +23,36 @@ La configuración para este microservicio se realiza a través de un archivo de 
 Configuración del servidor:
 El microservicio se ejecuta en el puerto 8081 y tiene un contexto de servlet en /api/v1/.
 
-Configuración de Seguridad Keycloak:
+### Configuración de Seguridad Keycloak:
 Este proyecto utiliza Keycloak para la autenticación y autorización de usuarios. Los tokens emitidos por Keycloak son tokens JWT, y el proyecto utiliza una configuración personalizada para decodificar estos tokens y convertirlos en objetos de autenticación utilizables en el sistema.
 
-Clase: AccessTokenInterceptor
+--
+# Feign Config
+--
+
+### Clase: AccessTokenInterceptor
 Esta clase implementa la interfaz RequestInterceptor de Feign y se encarga de agregar el token de acceso en el encabezado de la solicitud saliente. El token se obtiene a partir del contexto de seguridad de Spring, en particular del JwtAuthenticationToken. Si se encuentra un token válido, se agrega al encabezado de la solicitud saliente.
 
-Métodos:
+### Métodos:
 apply(RequestTemplate requestTemplate): Este método es proporcionado por la interfaz RequestInterceptor y se ejecuta antes de enviar una solicitud a un servidor. Dentro de este método, se obtiene el token de acceso y se agrega al encabezado de la solicitud.
 Clase: OAuthClientCredentialsFeignManager
 Esta clase se utiliza para obtener el token de acceso utilizando el flujo de credenciales del cliente OAuth2. Toma un OAuth2AuthorizedClientManager y una ClientRegistration en su constructor. Proporciona un método getAccessToken() para obtener el token de acceso utilizando el flujo de credenciales del cliente.
 
-Métodos:
+### Clase: OAuthClientCredentialsFeignManager
+Esta clase se utiliza para obtener el token de acceso utilizando el flujo de credenciales del cliente OAuth2. Toma un OAuth2AuthorizedClientManager y una ClientRegistration en su constructor. Proporciona un método getAccessToken() para obtener el token de acceso utilizando el flujo de credenciales del cliente.
+
+### Métodos:
 getAccessToken(): Este método obtiene el token de acceso utilizando el flujo de credenciales del cliente OAuth2. Utiliza el OAuth2AuthorizedClientManager para autorizar la solicitud y devuelve el token de acceso si se obtiene correctamente.
-Clase: OAuthFeignConfig
+
+### Clase: OAuthFeignConfig
 Esta clase de configuración se encarga de proporcionar un RequestInterceptor para Feign, que agrega el token de acceso en el encabezado de las solicitudes salientes. Utiliza la clase OAuthClientCredentialsFeignManager para obtener el token de acceso utilizando el flujo de credenciales del cliente OAuth2.
 
-Métodos:
+### Métodos:
 requestInterceptor(): Este método devuelve un RequestInterceptor que se utiliza para agregar el token de acceso en el encabezado de las solicitudes salientes. Utiliza el OAuthClientCredentialsFeignManager para obtener el token de acceso.
 
 authorizedClientManager(): Este método configura y devuelve un OAuth2AuthorizedClientManager que se utiliza para autorizar la solicitud y obtener el token de acceso utilizando el flujo de credenciales del cliente OAuth2.
 
 Nota: Las anotaciones @Slf4j y @RequiredArgsConstructor presentes en la clase OAuthClientCredentialsFeignManager no están documentadas ya que no se proporcionó información suficiente sobre las dependencias y su funcionalidad.
-
-Recuerde que estas clases se utilizan para integrar Feign con OAuth2 y asegurar la autorización en las solicitudes a otros microservicios. Asegúrese de que la configuración de OAuth2 y las dependencias necesarias estén correctamente establecidas en el proyecto antes de utilizar estas clases.
-
-¡Espero que esta documentación sea útil! Si tiene alguna pregunta adicional, no dude en preguntar.
-
 ---
 
 ### Microservicio "Users"
