@@ -121,7 +121,8 @@ Configuración de Eureka:
 Configuración del cliente de Eureka:
 - `eureka.client.fetch-registry`: Cuando se establece en `false`, indica que este servidor no necesita obtener el registro de Eureka de otros servidores Eureka.
 - `eureka.client.register-with-eureka`: Cuando se establece en `false`, indica que este servidor no necesita registrarse con otros servidores Eureka. Esto tiene sentido aquí ya que este servidor es el servidor de registro.
-![Screenshot 2023-06-09 154218](https://github.com/Elkinssm/parcial_back_end_II_keycloack/assets/52393397/cc6cd354-425e-4723-8a2d-8e362e7d580a)
+![image](https://github.com/Elkinssm/parcial_back_end_II_keycloack/assets/52393397/a8181a20-469f-4449-9bbd-5367811ce479)
+
 
 ---
 
