@@ -214,7 +214,11 @@ Finalmente levantamos el ultimo microservicio (ms-users)
 
 # Pruebas del programa
 
+## Video Inicial
+
 [![Video Pruebas programa Primer Entregable](https://img.youtube.com/vi/BCBFWojxLNU/default.jpg)](https://youtu.be/BCBFWojxLNU)
+
+## Video Final 
 
 [![Video Pruebas programa Entregable Final](https://img.youtube.com/vi/BCBFWojxLNU/default.jpg)]([https://youtu.be/BCBFWojxLNU](https://youtu.be/nVFosTyImAY))
 ---
