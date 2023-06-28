@@ -28,6 +28,28 @@ Este proyecto utiliza Keycloak para la autenticación y autorización de usuario
 
 ---
 
+### Microservicio "Users"
+El microservicio "Bills" es responsable de la gestión de las facturas de los clientes en el sistema de comercio electrónico. Este microservicio proporciona una API REST que expone las funcionalidades para interactuar con las facturas.
+
+Endpoints
+El microservicio "Bills" expone los siguientes endpoints:
+
+GET /bills/all
+Este endpoint devuelve una lista de todas las facturas existentes en el sistema.
+
+Requerimientos:
+
+Autenticación: El usuario debe estar autenticado.
+Rol: El usuario debe tener el rol "USER".
+Configuración
+La configuración del microservicio "Bills" se realiza a través de un archivo de propiedades. A continuación se detallan las diferentes configuraciones disponibles:
+
+Configuración del servidor
+Puerto: El microservicio se ejecuta en el puerto 8081.
+Contexto del servlet: El contexto del servlet es "/api/v1/".
+
+---
+
 ## Clase `KeyCloakJwtAuthenticationConverter`
 Esta clase implementa la interfaz `Converter` y se utiliza para convertir un `Jwt` en un `AbstractAuthenticationToken`. Esto permite al sistema de seguridad de Spring interpretar correctamente los tokens JWT emitidos por Keycloak. 
 Esta clase realiza varias funciones:
