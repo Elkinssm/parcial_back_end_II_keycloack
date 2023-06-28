@@ -10,6 +10,7 @@ import org.springframework.core.convert.converter.Converter;
 import org.springframework.security.authentication.AbstractAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 import org.springframework.security.oauth2.server.resource.authentication.JwtGrantedAuthoritiesConverter;
@@ -30,6 +31,7 @@ public class KeyCloakJwtAuthenticationConverter implements Converter<Jwt, Abstra
         resourcesRoles.addAll(extractRoles("resource_access", objectMapper.readTree(objectMapper.writeValueAsString(jwt)).get("claims")));
         resourcesRoles.addAll(extractRolesRealmAccess("realm_access", objectMapper.readTree(objectMapper.writeValueAsString(jwt)).get("claims")));
         resourcesRoles.addAll(extractAud("aud", objectMapper.readTree(objectMapper.writeValueAsString(jwt)).get("claims")));
+        resourcesRoles.addAll(extractGroups("user_groups", objectMapper.readTree(objectMapper.writeValueAsString(jwt)).get("claims")));
         return resourcesRoles;
     }
 
@@ -82,6 +84,19 @@ public class KeyCloakJwtAuthenticationConverter implements Converter<Jwt, Abstra
         return AuthorityUtils.createAuthorityList(rolesWithPrefix.toArray(new String[0]));
     }
 
+    private static List<GrantedAuthority> extractGroups(String route, JsonNode jwt) {
+        List<GrantedAuthority> groupAuthorities = new ArrayList<>();
+        JsonNode groups = jwt.path(route);
+
+        if (groups.isArray()) {
+            for (JsonNode group : groups) {
+                String groupName = group.asText();
+                groupAuthorities.add(new SimpleGrantedAuthority("GROUP_" + groupName));
+            }
+        }
+
+        return groupAuthorities;
+    }
 
     public KeyCloakJwtAuthenticationConverter() {
     }

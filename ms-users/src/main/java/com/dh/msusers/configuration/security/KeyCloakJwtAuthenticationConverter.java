@@ -1,4 +1,4 @@
-package com.dh.msusers.configuration.security;
+package com.dh.msbills.security;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -10,6 +10,7 @@ import org.springframework.core.convert.converter.Converter;
 import org.springframework.security.authentication.AbstractAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 import org.springframework.security.oauth2.server.resource.authentication.JwtGrantedAuthoritiesConverter;
@@ -30,6 +31,7 @@ public class KeyCloakJwtAuthenticationConverter implements Converter<Jwt, Abstra
         resourcesRoles.addAll(extractRoles("resource_access", objectMapper.readTree(objectMapper.writeValueAsString(jwt)).get("claims")));
         resourcesRoles.addAll(extractRolesRealmAccess("realm_access", objectMapper.readTree(objectMapper.writeValueAsString(jwt)).get("claims")));
         resourcesRoles.addAll(extractAud("aud", objectMapper.readTree(objectMapper.writeValueAsString(jwt)).get("claims")));
+        resourcesRoles.addAll(extractGroups("user_groups", objectMapper.readTree(objectMapper.writeValueAsString(jwt)).get("claims")));
         return resourcesRoles;
     }
 
@@ -46,23 +48,16 @@ public class KeyCloakJwtAuthenticationConverter implements Converter<Jwt, Abstra
                 for (JsonNode role : field.getValue().get("roles")) {
                     LOGGER.info("    Role: " + role.asText());
                 }
-            } else if (field.getKey().equals("user_groups")) {
-                LOGGER.info("User Groups: ");
-                JsonNode groups = field.getValue();
-                if (groups.isArray()) {
-                    for (JsonNode group : groups) {
-                        LOGGER.info("    Group: " + group.asText());
-                    }
-                } else {
-                    LOGGER.info("    Group: " + groups.asText());
+            } else if (field.getKey().equals("groups")) {
+                LOGGER.info("Groups: ");
+                for (JsonNode group : field.getValue()) {
+                    LOGGER.info("    Group: " + group.asText());
                 }
             } else {
                 LOGGER.info(field.getKey() + ": " + field.getValue().toString());
             }
         }
     }
-
-
 
 
     private static List<GrantedAuthority> extractRoles(String route, JsonNode jwt) {
@@ -89,6 +84,19 @@ public class KeyCloakJwtAuthenticationConverter implements Converter<Jwt, Abstra
         return AuthorityUtils.createAuthorityList(rolesWithPrefix.toArray(new String[0]));
     }
 
+    private static List<GrantedAuthority> extractGroups(String route, JsonNode jwt) {
+        List<GrantedAuthority> groupAuthorities = new ArrayList<>();
+        JsonNode groups = jwt.path(route);
+
+        if (groups.isArray()) {
+            for (JsonNode group : groups) {
+                String groupName = group.asText();
+                groupAuthorities.add(new SimpleGrantedAuthority("GROUP_" + groupName));
+            }
+        }
+
+        return groupAuthorities;
+    }
 
     public KeyCloakJwtAuthenticationConverter() {
     }

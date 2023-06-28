@@ -16,6 +16,7 @@ public class BillsFeignRepository implements IBillsRepository {
 
     @Override
     public List<Bill> findByCustomerId(String id) {
+
         return feignClient.findByCustomerId(id);
     }
 }

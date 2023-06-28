@@ -29,8 +29,8 @@ public class BillController {
     }
 
 
-    @PostMapping("/bills")
-    @PreAuthorize("hasAnyAuthority('PROVIDER')")
+    @PostMapping("/create")
+    @PreAuthorize("hasAuthority('GROUP_PROVIDERS')")
     public ResponseEntity<Bill> createBill(@RequestBody Bill bill) {
         Bill savedBill = service.saveBill(bill);
         return ResponseEntity.ok(savedBill);
