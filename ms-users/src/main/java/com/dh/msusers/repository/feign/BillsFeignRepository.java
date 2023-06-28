@@ -11,7 +11,6 @@ import java.util.List;
 @RequiredArgsConstructor
 public class BillsFeignRepository implements IBillsRepository {
 
-
     private final IBillsFeignClient feignClient;
 
     @Override

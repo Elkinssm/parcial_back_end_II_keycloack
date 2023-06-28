@@ -1,6 +1,8 @@
 {
   "id": "8a8d7c6c-2ef1-420e-b615-88147b7bbc02",
-  "realm": "parcial-realm",
+  "realm": "ecommerce-realm",
+  "displayName": "",
+  "displayNameHtml": "",
   "notBefore": 0,
   "defaultSignatureAlgorithm": "RS256",
   "revokeRefreshToken": false,
@@ -312,8 +314,10 @@
           "attributes": {}
         }
       ],
-      "ms-partial-client": [],
-      "partial-client": [
+      "security-admin-console": [],
+      "admin-cli": [],
+      "ms-finance-client": [],
+      "ms-gateway-client": [
         {
           "id": "0ece482a-3a8d-4c68-91c3-98bd0f434162",
           "name": "APP_USER",
@@ -329,8 +333,6 @@
           "attributes": {}
         }
       ],
-      "security-admin-console": [],
-      "admin-cli": [],
       "account-console": [],
       "broker": [
         {
@@ -433,7 +435,17 @@
       ]
     }
   },
-  "groups": [],
+  "groups": [
+    {
+      "id": "4b928b71-c7e6-4d52-aa9d-9d5f1f30c1b6",
+      "name": "PROVIDERS",
+      "path": "/PROVIDERS",
+      "attributes": {},
+      "realmRoles": [],
+      "clientRoles": {},
+      "subGroups": []
+    }
+  ],
   "defaultRole": {
     "id": "e35a9372-fa5c-48a0-9749-6cc39b207a3b",
     "name": "default-roles-parcial-realm",
@@ -453,8 +465,8 @@
   "otpPolicyPeriod": 30,
   "otpPolicyCodeReusable": false,
   "otpSupportedApplications": [
-    "totpAppMicrosoftAuthenticatorName",
     "totpAppFreeOTPName",
+    "totpAppMicrosoftAuthenticatorName",
     "totpAppGoogleName"
   ],
   "webAuthnPolicyRpEntityName": "keycloak",
@@ -485,11 +497,11 @@
     {
       "id": "cf13ddf5-a30a-4081-97b1-411c0778376d",
       "createdTimestamp": 1686186251207,
-      "username": "service-account-ms-partial-client",
+      "username": "service-account-ms-finance-client",
       "enabled": true,
       "totp": false,
       "emailVerified": false,
-      "serviceAccountClientId": "ms-partial-client",
+      "serviceAccountClientId": "ms-finance-client",
       "disableableCredentialTypes": [],
       "requiredActions": [],
       "realmRoles": [
@@ -501,11 +513,11 @@
     {
       "id": "48c32782-c446-4553-a793-2b0ba62c1427",
       "createdTimestamp": 1686186161624,
-      "username": "service-account-partial-client",
+      "username": "service-account-ms-gateway-client",
       "enabled": true,
       "totp": false,
       "emailVerified": false,
-      "serviceAccountClientId": "partial-client",
+      "serviceAccountClientId": "ms-gateway-client",
       "disableableCredentialTypes": [],
       "requiredActions": [],
       "realmRoles": [
@@ -540,13 +552,13 @@
       "clientId": "account",
       "name": "${client_account}",
       "rootUrl": "${authBaseUrl}",
-      "baseUrl": "/realms/parcial-realm/account/",
+      "baseUrl": "/realms/ecommerce-realm/account/",
       "surrogateAuthRequired": false,
       "enabled": true,
       "alwaysDisplayInConsole": false,
       "clientAuthenticatorType": "client-secret",
       "redirectUris": [
-        "/realms/parcial-realm/account/*"
+        "/realms/ecommerce-realm/account/*"
       ],
       "webOrigins": [],
       "notBefore": 0,
@@ -712,8 +724,8 @@
     },
     {
       "id": "c2103efb-8139-4bb7-bfb9-e793a91e12b4",
-      "clientId": "ms-partial-client",
-      "name": "ms-partial-client",
+      "clientId": "ms-finance-client",
+      "name": "ms-finance-client",
       "description": "",
       "rootUrl": "",
       "adminUrl": "",
@@ -810,8 +822,8 @@
     },
     {
       "id": "f68dbd00-49dd-406e-86f9-9d7b104e35f7",
-      "clientId": "partial-client",
-      "name": "partial-client",
+      "clientId": "ms-gateway-client",
+      "name": "ms-gateway-client",
       "description": "",
       "rootUrl": "http://localhost:8090/",
       "adminUrl": "http://localhost:8090",
@@ -896,6 +908,7 @@
         "acr",
         "profile",
         "roles",
+        "groups",
         "email"
       ],
       "optionalClientScopes": [
@@ -948,13 +961,13 @@
       "clientId": "security-admin-console",
       "name": "${client_security-admin-console}",
       "rootUrl": "${authAdminUrl}",
-      "baseUrl": "/admin/parcial-realm/console/",
+      "baseUrl": "/admin/ecommerce-realm/console/",
       "surrogateAuthRequired": false,
       "enabled": true,
       "alwaysDisplayInConsole": false,
       "clientAuthenticatorType": "client-secret",
       "redirectUris": [
-        "/admin/parcial-realm/console/*"
+        "/admin/ecommerce-realm/console/*"
       ],
       "webOrigins": [
         "+"
@@ -1464,6 +1477,50 @@
       ]
     },
     {
+      "id": "80758f33-4be9-4759-9eed-9d245e886f54",
+      "name": "groups",
+      "description": "",
+      "protocol": "openid-connect",
+      "attributes": {
+        "include.in.token.scope": "true",
+        "display.on.consent.screen": "true",
+        "gui.order": "",
+        "consent.screen.text": ""
+      },
+      "protocolMappers": [
+        {
+          "id": "6ca57c91-cc29-4df1-ab2d-b61442a325f7",
+          "name": "groups",
+          "protocol": "openid-connect",
+          "protocolMapper": "oidc-usermodel-realm-role-mapper",
+          "consentRequired": false,
+          "config": {
+            "multivalued": "true",
+            "userinfo.token.claim": "true",
+            "user.attribute": "foo",
+            "id.token.claim": "true",
+            "access.token.claim": "true",
+            "claim.name": "groups",
+            "jsonType.label": "String"
+          }
+        },
+        {
+          "id": "9ba0b12a-7a3f-4b4f-8b3a-d961dfa8fcb0",
+          "name": "groups by user",
+          "protocol": "openid-connect",
+          "protocolMapper": "oidc-group-membership-mapper",
+          "consentRequired": false,
+          "config": {
+            "full.path": "false",
+            "id.token.claim": "true",
+            "access.token.claim": "true",
+            "claim.name": "user_groups",
+            "userinfo.token.claim": "true"
+          }
+        }
+      ]
+    },
+    {
       "id": "ab835b97-45de-43be-9b87-8d4f374c1c8f",
       "name": "microprofile-jwt",
       "description": "Microprofile - JWT built-in scope",
@@ -1522,7 +1579,8 @@
     "email",
     "roles",
     "web-origins",
-    "acr"
+    "acr",
+    "groups"
   ],
   "defaultOptionalClientScopes": [
     "offline_access",
@@ -1657,6 +1715,14 @@
         }
       }
     ],
+    "org.keycloak.userprofile.UserProfileProvider": [
+      {
+        "id": "50bdbc25-c1f4-4b8e-8929-6015eca02fc0",
+        "providerId": "declarative-user-profile",
+        "subComponents": {},
+        "config": {}
+      }
+    ],
     "org.keycloak.keys.KeyProvider": [
       {
         "id": "faf7af66-a5fb-4e0d-b796-39bf2e92cfde",
@@ -1666,20 +1732,6 @@
         "config": {
           "priority": [
             "100"
-          ]
-        }
-      },
-      {
-        "id": "a119f6dd-f8a6-456b-afba-512466b8fa9b",
-        "name": "hmac-generated",
-        "providerId": "hmac-generated",
-        "subComponents": {},
-        "config": {
-          "priority": [
-            "100"
-          ],
-          "algorithm": [
-            "HS256"
           ]
         }
       },
@@ -1694,6 +1746,20 @@
           ],
           "algorithm": [
             "RSA-OAEP"
+          ]
+        }
+      },
+      {
+        "id": "a119f6dd-f8a6-456b-afba-512466b8fa9b",
+        "name": "hmac-generated",
+        "providerId": "hmac-generated",
+        "subComponents": {},
+        "config": {
+          "priority": [
+            "100"
+          ],
+          "algorithm": [
+            "HS256"
           ]
         }
       },
@@ -2400,13 +2466,19 @@
   "dockerAuthenticationFlow": "docker auth",
   "attributes": {
     "cibaBackchannelTokenDeliveryMode": "poll",
-    "cibaExpiresIn": "120",
     "cibaAuthRequestedUserHint": "login_hint",
-    "oauth2DeviceCodeLifespan": "600",
     "oauth2DevicePollingInterval": "5",
-    "parRequestUriLifespan": "60",
+    "clientOfflineSessionMaxLifespan": "0",
+    "clientSessionIdleTimeout": "0",
+    "clientOfflineSessionIdleTimeout": "0",
     "cibaInterval": "5",
-    "realmReusableOtpCode": "false"
+    "realmReusableOtpCode": "false",
+    "cibaExpiresIn": "120",
+    "oauth2DeviceCodeLifespan": "600",
+    "parRequestUriLifespan": "60",
+    "clientSessionMaxLifespan": "0",
+    "frontendUrl": "",
+    "acr.loa.map": "{}"
   },
   "keycloakVersion": "21.0.1",
   "userManagedAccessAllowed": false,
