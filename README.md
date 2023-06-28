@@ -52,7 +52,6 @@ requestInterceptor(): Este método devuelve un RequestInterceptor que se utiliza
 
 authorizedClientManager(): Este método configura y devuelve un OAuth2AuthorizedClientManager que se utiliza para autorizar la solicitud y obtener el token de acceso utilizando el flujo de credenciales del cliente OAuth2.
 
-Nota: Las anotaciones @Slf4j y @RequiredArgsConstructor presentes en la clase OAuthClientCredentialsFeignManager no están documentadas ya que no se proporcionó información suficiente sobre las dependencias y su funcionalidad.
 ---
 
 ### Microservicio "Users"
