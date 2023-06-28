@@ -18,6 +18,6 @@ public class UserController {
 
     @GetMapping("/findBy")
     public ResponseEntity<User> getAll(@RequestParam String id) {
-        return ResponseEntity.ok().body(userService.getAllBill(id));
+        return ResponseEntity.ok().body(userService.getUserAndBills(id));
     }
 }

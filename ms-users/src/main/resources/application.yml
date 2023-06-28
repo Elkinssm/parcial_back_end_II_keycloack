@@ -3,6 +3,8 @@ server:
     context-path: /api/v1/
   port: 8092
 spring:
+  main:
+    allow-bean-definition-overriding: true
   security:
     oauth2:
       client:
@@ -29,8 +31,11 @@ eureka:
       defaultZone: http://localhost:8761/eureka
 keycloak:
   serverUrl: http://localhost:8080/
-  realm: parcial-realm
-  clientId: ms-partial-client
-  clientSecret: kDYGM9e0mpPsdQRlyMSg6tDQ92cJl9UO
+  realm: master
+  clientId: admin-cli
+  clientSecret: XwUuxDY5tfDkD4017S6iv1wbk9KI1mIB
+  user: admin
+  password: admin
+  realmApp: parcial-realm
   jwkset:
     url: http://localhost:8080/realms/parcial-realm/protocol/openid-connect/certs

@@ -9,8 +9,8 @@ import lombok.Setter;
 @RequiredArgsConstructor
 public class Bill {
 
-    private String id;
+    private String idBill;
     private String customerBill;
     private String productBill;
-    private Double total;
+    private Double totalPrice;
 }

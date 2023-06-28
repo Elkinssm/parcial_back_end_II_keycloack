@@ -17,8 +17,12 @@ public class BillService {
         return repository.findAll();
     }
 
-    public Bill findByBillId(String billId) {
-        return repository.findById(billId)
-                .orElseThrow(() -> new RuntimeException("Bill not found with id " + billId));
+    public Bill findByBillId(String id) {
+        return repository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Bill not found with id " + id));
+    }
+
+    public List<Bill> getByEmail(String email) {
+        return repository.findAllByEmail(email);
     }
 }

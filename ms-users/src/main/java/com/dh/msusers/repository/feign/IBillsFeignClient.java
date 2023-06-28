@@ -10,6 +10,6 @@ import java.util.List;
 
 @FeignClient(name = "ms-bill", configuration = OAuthFeignConfig.class)
 public interface IBillsFeignClient {
-    @GetMapping("/api/v1/bills/findBy")
-    List<Bill> findByCustomerId(@RequestParam("customerId") String customerId);
+    @GetMapping("/api/v1/bills/filter")
+    List<Bill> findByCustomerId(@RequestParam("email") String email);
 }

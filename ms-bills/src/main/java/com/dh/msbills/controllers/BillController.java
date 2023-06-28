@@ -25,11 +25,17 @@ public class BillController {
         return ResponseEntity.ok().body(service.getAllBill());
     }
 
+    @GetMapping("/filter")
+    @PreAuthorize("hasRole('USER')")
+    public ResponseEntity<List<Bill>> getByEmail(@RequestParam String email) {
+        return ResponseEntity.ok().body(service.getByEmail(email));
+    }
+
 
     @GetMapping("/findBy")
     @PreAuthorize("hasRole('USER')")
-    public ResponseEntity<Bill> getBillById(@RequestParam String billId) {
-        return ResponseEntity.ok().body(service.findByBillId(billId));
+    public ResponseEntity<Bill> getBillById(@RequestParam String id) {
+        return ResponseEntity.ok().body(service.findByBillId(id));
     }
 
 }

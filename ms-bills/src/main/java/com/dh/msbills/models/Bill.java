@@ -26,4 +26,6 @@ public class Bill {
     private String productBill;
 
     private Double totalPrice;
+
+    private String email;
 }

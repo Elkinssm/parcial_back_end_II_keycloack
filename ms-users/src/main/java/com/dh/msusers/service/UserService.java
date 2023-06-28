@@ -2,29 +2,34 @@ package com.dh.msusers.service;
 
 import com.dh.msusers.model.Bill;
 import com.dh.msusers.model.User;
-import com.dh.msusers.repository.IUserRepository;
+import com.dh.msusers.repository.KeyCloakUserRepository;
 import com.dh.msusers.repository.feign.IBillsFeignClient;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-
 public class UserService {
 
-    private final IUserRepository userRepository;
+    private final KeyCloakUserRepository keyCloakUserRepository;
     private final IBillsFeignClient billsFeignClient;
 
-    public UserService(IUserRepository userRepository, IBillsFeignClient billsFeignClient) {
-        this.userRepository = userRepository;
+    public UserService(KeyCloakUserRepository keyCloakUserRepository, IBillsFeignClient billsFeignClient) {
+        this.keyCloakUserRepository = keyCloakUserRepository;
         this.billsFeignClient = billsFeignClient;
     }
 
     public User getUserAndBills(String id) {
-        User user = userRepository.findById(id);
-        List<Bill> bills = billsFeignClient.findByCustomerId(id);
-        user.setBillList(bills);
-        return user;
+        try {
+            User user = keyCloakUserRepository.findById(id);
+            List<Bill> bills = billsFeignClient.findByCustomerId(user.getEmail());
+            user.setBillList(bills);
+            return user;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
+
 
 }

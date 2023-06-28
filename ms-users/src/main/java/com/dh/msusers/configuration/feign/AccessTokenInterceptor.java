@@ -2,16 +2,39 @@ package com.dh.msusers.configuration.feign;
 
 import feign.RequestInterceptor;
 import feign.RequestTemplate;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 import org.springframework.stereotype.Component;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
+
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 @Component
 public class AccessTokenInterceptor implements RequestInterceptor {
+    private static final Logger LOG = Logger.getLogger(AccessTokenInterceptor.class.getSimpleName());
+
     @Override
     public void apply(RequestTemplate requestTemplate) {
-        ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
-        String accesToken = attributes.getRequest().getHeader("Authorization");
-        requestTemplate.header("Authorization", accesToken);
+
+        String token = getAccessToken();
+        if (token != null) {
+            LOG.log(Level.INFO, "FeignInterceptor user-service " + token);
+            requestTemplate.header("Authorization", "Bearer " + token);
+        }
+    }
+
+
+    private String getAccessToken() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String token = null;
+        if (authentication != null) {
+            try {
+                token = ((JwtAuthenticationToken) authentication).getToken().getTokenValue();
+            } catch (Exception ignored) {
+
+            }
+        }
+        return token;
     }
 }

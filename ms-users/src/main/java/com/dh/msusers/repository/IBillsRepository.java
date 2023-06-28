@@ -4,5 +4,5 @@ import com.dh.msusers.model.Bill;
 import java.util.List;
 
 public interface IBillsRepository {
-    List<Bill> findByCustomerId(String customerId);
+    List<Bill> findByCustomerId(String id);
 }

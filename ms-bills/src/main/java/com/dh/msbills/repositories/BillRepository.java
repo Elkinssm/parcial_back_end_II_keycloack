@@ -7,5 +7,6 @@ import java.util.List;
 
 
 public interface BillRepository extends JpaRepository<Bill, String> {
-    List<Bill> findAllByIdBill(String billId);
+    List<Bill> findAllByEmail(String email);
+
 }
