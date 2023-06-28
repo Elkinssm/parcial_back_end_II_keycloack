@@ -222,7 +222,7 @@ Finalmente levantamos el ultimo microservicio (ms-users)
 
 [![Video Pruebas programa Entregable Final](https://img.youtube.com/vi/BCBFWojxLNU/default.jpg)]([https://youtu.be/BCBFWojxLNU](https://youtu.be/nVFosTyImAY))
 ---
-[https://youtu.be/BCBFWojxLNU](https://youtu.be/nVFosTyImAY)
+[![Video Pruebas programa Entregable Final](https://img.youtube.com/vi/nVFosTyImAY/default.jpg)](https://youtu.be/nVFosTyImAY)
 
 ## Coleccion de postman
 
