@@ -23,8 +23,56 @@ La configuración para este microservicio se realiza a través de un archivo de 
 Configuración del servidor:
 El microservicio se ejecuta en el puerto 8081 y tiene un contexto de servlet en /api/v1/.
 
-Configuración de Seguridad Keycloak:
+### Configuración de Seguridad Keycloak:
 Este proyecto utiliza Keycloak para la autenticación y autorización de usuarios. Los tokens emitidos por Keycloak son tokens JWT, y el proyecto utiliza una configuración personalizada para decodificar estos tokens y convertirlos en objetos de autenticación utilizables en el sistema.
+
+---
+# Feign Config
+---
+
+### Clase: AccessTokenInterceptor
+Esta clase implementa la interfaz RequestInterceptor de Feign y se encarga de agregar el token de acceso en el encabezado de la solicitud saliente. El token se obtiene a partir del contexto de seguridad de Spring, en particular del JwtAuthenticationToken. Si se encuentra un token válido, se agrega al encabezado de la solicitud saliente.
+
+### Métodos:
+apply(RequestTemplate requestTemplate): Este método es proporcionado por la interfaz RequestInterceptor y se ejecuta antes de enviar una solicitud a un servidor. Dentro de este método, se obtiene el token de acceso y se agrega al encabezado de la solicitud.
+Clase: OAuthClientCredentialsFeignManager
+Esta clase se utiliza para obtener el token de acceso utilizando el flujo de credenciales del cliente OAuth2. Toma un OAuth2AuthorizedClientManager y una ClientRegistration en su constructor. Proporciona un método getAccessToken() para obtener el token de acceso utilizando el flujo de credenciales del cliente.
+
+### Clase: OAuthClientCredentialsFeignManager
+Esta clase se utiliza para obtener el token de acceso utilizando el flujo de credenciales del cliente OAuth2. Toma un OAuth2AuthorizedClientManager y una ClientRegistration en su constructor. Proporciona un método getAccessToken() para obtener el token de acceso utilizando el flujo de credenciales del cliente.
+
+### Métodos:
+getAccessToken(): Este método obtiene el token de acceso utilizando el flujo de credenciales del cliente OAuth2. Utiliza el OAuth2AuthorizedClientManager para autorizar la solicitud y devuelve el token de acceso si se obtiene correctamente.
+
+### Clase: OAuthFeignConfig
+Esta clase de configuración se encarga de proporcionar un RequestInterceptor para Feign, que agrega el token de acceso en el encabezado de las solicitudes salientes. Utiliza la clase OAuthClientCredentialsFeignManager para obtener el token de acceso utilizando el flujo de credenciales del cliente OAuth2.
+
+### Métodos:
+requestInterceptor(): Este método devuelve un RequestInterceptor que se utiliza para agregar el token de acceso en el encabezado de las solicitudes salientes. Utiliza el OAuthClientCredentialsFeignManager para obtener el token de acceso.
+
+authorizedClientManager(): Este método configura y devuelve un OAuth2AuthorizedClientManager que se utiliza para autorizar la solicitud y obtener el token de acceso utilizando el flujo de credenciales del cliente OAuth2.
+
+---
+
+### Microservicio "Users"
+El microservicio "Bills" es responsable de la gestión de las facturas de los clientes en el sistema de comercio electrónico. Este microservicio proporciona una API REST que expone las funcionalidades para interactuar con las facturas.
+
+Endpoints
+El microservicio "Bills" expone los siguientes endpoints:
+
+GET /bills/all
+Este endpoint devuelve una lista de todas las facturas existentes en el sistema.
+
+Requerimientos:
+
+Autenticación: El usuario debe estar autenticado.
+Rol: El usuario debe tener el rol "USER".
+Configuración
+La configuración del microservicio "Bills" se realiza a través de un archivo de propiedades. A continuación se detallan las diferentes configuraciones disponibles:
+
+Configuración del servidor
+Puerto: El microservicio se ejecuta en el puerto 8081.
+Contexto del servlet: El contexto del servlet es "/api/v1/".
 
 ---
 
@@ -72,7 +120,8 @@ Configuración de Eureka:
 Configuración del cliente de Eureka:
 - `eureka.client.fetch-registry`: Cuando se establece en `false`, indica que este servidor no necesita obtener el registro de Eureka de otros servidores Eureka.
 - `eureka.client.register-with-eureka`: Cuando se establece en `false`, indica que este servidor no necesita registrarse con otros servidores Eureka. Esto tiene sentido aquí ya que este servidor es el servidor de registro.
-![Screenshot 2023-06-09 154218](https://github.com/Elkinssm/parcial_back_end_II_keycloack/assets/52393397/cc6cd354-425e-4723-8a2d-8e362e7d580a)
+![image](https://github.com/Elkinssm/parcial_back_end_II_keycloack/assets/52393397/a8181a20-469f-4449-9bbd-5367811ce479)
+
 
 ---
 
@@ -156,18 +205,29 @@ El siguiente paso es levantar el servicio de Discovery.
 ## Paso 3: Levantar el Gateway
 Una vez que el servicio de Discovery esté funcionando, puedes levantar el Gateway.
 
-## Paso 4: Levantar el Microservicio
-Finalmente, puedes levantar el microservicio.
+## Paso 4: Levantar el Microservicio de facturas (ms-bills)
+Levantamos el siguiente microservicio (ms-bills)
+
+## Paso 5: Finalmente levantamos el Microservicio de usuarios (ms-users)
+Finalmente levantamos el ultimo microservicio (ms-users)
 
 # Pruebas del programa
 
-[![Video Pruebas programa](https://img.youtube.com/vi/BCBFWojxLNU/default.jpg)](https://youtu.be/BCBFWojxLNU)
+## Video Inicial
+
+[![Video Pruebas programa Primer Entregable](https://img.youtube.com/vi/BCBFWojxLNU/default.jpg)](https://youtu.be/BCBFWojxLNU)
+
+## Video Final 
 ---
-https://youtu.be/BCBFWojxLNU
+[![Video Pruebas programa Entregable Final](https://img.youtube.com/vi/nVFosTyImAY/default.jpg)](https://youtu.be/nVFosTyImAY)
+
+https://youtu.be/nVFosTyImAY
 
 ## Coleccion de postman
 
 [Colección de Postman](./Parcial-Elkin-Silva.postman_collection.json)
+
+[Colección Final de Postman](./Parcial-Final-Elkin-Silva.postman_collection.json)
 
 ## Reino Keycloak
 
